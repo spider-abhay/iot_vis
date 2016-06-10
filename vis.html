@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+
+<html>
+	
+<head>
+<script src="./d3/d3.js" charset="utf-8"></script>
+
+</head>
+<style type="text/css">
+	body {
+    font: 12px Arial;
+    background-color: white;
+}
+
+.temp  {
+	stroke: red;
+}
+
+.humidity  {
+	stroke: blue;
+}
+path {
+    stroke: yellow;
+    stroke-width: 1;
+    fill: none;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2;
+    shape-rendering: crispEdges;
+}
+
+ text {
+    fill: black;
+}
+
+rect {
+    fill:  #000000;
+}
+
+</style>
+<script type="text/javascript">
+/*setInterval(function(){
+	loadDoc();
+},5000);*/
+	function loadDoc() {
+  		var xhttp = new XMLHttpRequest();
+ 		 xhttp.onreadystatechange = function() {
+ 		   if (xhttp.readyState == 4 && xhttp.status == 200) {
+  		   		document.getElementById("demo").innerHTML = xhttp.responseText;
+ 	   		}
+  		};
+	  xhttp.open("GET", "http://10.37.1.111/IoTService/Weather/GetDeviceTemperature?id=1&noOfRecords=2", true);
+	  xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+	  xhttp.send();
+   } 
+
+</script>
+<body>
+	<text>Team ID</text>
+	<input id="teamId" type="text"/>
+	<text>Poll Interval</text>
+	<select id="pollingInterval">
+	  <option value=1000>1 second</option>
+	  <option value=3000>3 seconds</option>
+	  <option value=5000>5 seconds</option>
+	  <option value=8000>8 seconds</option>
+	  <option value=13000>13 seconds</option>
+	  <option value=21000>21 seconds</option>
+	</select> 
+	<button type="button" onClick="FetchData();">Go</button>
+	<script type="text/javascript"  src="./chart.js"></script>
+	<div id="demo"></div>
+</body>
+</html>
